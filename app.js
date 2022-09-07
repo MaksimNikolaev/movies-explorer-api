@@ -7,7 +7,7 @@ const NotFoundError = require('./errors/Not-found-err');
 const app = express();
 const { PORT = 3000 } = process.env;
 // подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect('mongodb://localhost:27017/moviesdb');
 
 app.use(express.json());
 
