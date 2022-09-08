@@ -9,6 +9,7 @@ const routes = require('./routes/index');
 const NotFoundError = require('./errors/Not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const MONGODB_ADDRESS = require('./utils/constants');
+const limiter = require('./middlewares/rateLimit');
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -22,6 +23,8 @@ app.use(requestLogger);
 app.use(cors());
 
 app.use(helmet());
+
+app.use(limiter);
 
 app.use(routes); // подключаем роуты
 
