@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const NOTLINK_ERROR_MESSAGE = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -25,17 +26,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: [validator.isURL, 'Введите ссылку.'],
+    validate: [validator.isURL, NOTLINK_ERROR_MESSAGE],
   },
   trailerLink: {
     type: String,
     required: true,
-    validate: [validator.isURL, 'Введите ссылку.'],
+    validate: [validator.isURL, NOTLINK_ERROR_MESSAGE],
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: [validator.isURL, 'Введите ссылку.'],
+    validate: [validator.isURL, NOTLINK_ERROR_MESSAGE],
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

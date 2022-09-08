@@ -8,13 +8,12 @@ const error = require('./middlewares/error');
 const routes = require('./routes/index');
 const NotFoundError = require('./errors/Not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const { NODE_ENV, DATABASE_URL } = process.env;
+const MONGODB_ADDRESS = require('./utils/constants');
 
 const app = express();
 const { PORT = 3000 } = process.env;
 // подключаемся к серверу mongo
-mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : 'mongodb://localhost:27017/moviesdb');
+mongoose.connect(MONGODB_ADDRESS);
 
 app.use(express.json());
 

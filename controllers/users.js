@@ -6,24 +6,30 @@ const NotFoundError = require('../errors/Not-found-err');
 const BadRequest = require('../errors/Bad-request-err');
 const InternalServerError = require('../errors/Internal-server-err');
 const ConflictError = require('../errors/Conflict-err');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
+const {
+  TOKEN_SECRET,
+  AUTH_ERROR_MESSAGE,
+  DEFAULT_ERROR_MESSAGE,
+  VALIDATE_EMAIL_ERROR_MESSAGE,
+  INCORRECT_DATA_ERROR_MESSAGE,
+  USER_NOTFOUND_ERROR_MESSAGE,
+} = require('../utils/constants');
 
 module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
-      return next(new Unauthorized('Неправильные почта или пароль.'));
+      return next(new Unauthorized(AUTH_ERROR_MESSAGE));
     }
     const checkPass = await bcrypt.compare(password, user.password);
     if (!checkPass) {
-      return next(new Unauthorized('Неправильные почта или пароль.'));
+      return next(new Unauthorized(AUTH_ERROR_MESSAGE));
     }
-    const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ _id: user._id }, TOKEN_SECRET, { expiresIn: '7d' });
     return res.send({ token });
   } catch (err) {
-    return next(new InternalServerError('Ошибка по умолчанию.'));
+    return next(new InternalServerError(DEFAULT_ERROR_MESSAGE));
   }
 };
 
@@ -44,11 +50,11 @@ module.exports.createUser = async (req, res, next) => {
     });
   } catch (err) {
     if (err.code === 11000) {
-      next(new ConflictError('Такой Email уже существует'));
+      next(new ConflictError(VALIDATE_EMAIL_ERROR_MESSAGE));
       return;
     }
     if (err.name === 'ValidationError') {
-      next(new BadRequest(`Переданы некорректные данные ${err}`));
+      next(new BadRequest(`${INCORRECT_DATA_ERROR_MESSAGE} ${err}`));
       return;
     }
     next(err);
@@ -59,7 +65,7 @@ module.exports.getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
     if (!user) {
-      return next(new NotFoundError('Пользователь по указанному _id не найден.'));
+      return next(new NotFoundError(USER_NOTFOUND_ERROR_MESSAGE));
     }
     res.send(user);
   } catch (err) {
@@ -80,19 +86,19 @@ module.exports.updateProfile = async (req, res, next) => {
       },
     );
     if (!user) {
-      next(new NotFoundError('Пользователь по указанному _id не найден'));
+      next(new NotFoundError(USER_NOTFOUND_ERROR_MESSAGE));
       return;
     }
     res.send(user);
   } catch (err) {
     if (err.name === 'CastError') {
-      next(new BadRequest('Переданы некорректные данные при обновлении профиля.'));
+      next(new BadRequest(INCORRECT_DATA_ERROR_MESSAGE));
       return;
     }
     if (err.name === 'ValidationError') {
-      next(new BadRequest('Переданы некорректные данные при обновлении профиля.'));
+      next(new BadRequest(INCORRECT_DATA_ERROR_MESSAGE));
       return;
     }
-    next(new InternalServerError('Ошибка по умолчанию.'));
+    next(new InternalServerError(DEFAULT_ERROR_MESSAGE));
   }
 };
