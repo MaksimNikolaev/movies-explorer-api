@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const NOTLINK_ERROR_MESSAGE = require('../utils/constants');
+const { NOTLINK_ERROR_MESSAGE } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {

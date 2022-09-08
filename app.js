@@ -8,7 +8,7 @@ const error = require('./middlewares/error');
 const routes = require('./routes/index');
 const NotFoundError = require('./errors/Not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const MONGODB_ADDRESS = require('./utils/constants');
+const { MONGODB_ADDRESS } = require('./utils/constants');
 const limiter = require('./middlewares/rateLimit');
 
 const app = express();

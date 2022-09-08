@@ -5,7 +5,7 @@ const {
   createMovies,
   removeMovies,
 } = require('../controllers/movies');
-const regExpUrl = require('../utils/constants');
+const { regExpUrl } = require('../utils/constants');
 
 router.get('/', getMovies);
 

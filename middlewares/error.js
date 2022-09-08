@@ -1,4 +1,4 @@
-const DEFAULT_ERROR_MESSAGE = require('../utils/constants');
+const { DEFAULT_ERROR_MESSAGE } = require('../utils/constants');
 
 const error = (err, req, res, next) => {
   const statusCode = err.statusCode || 500;
