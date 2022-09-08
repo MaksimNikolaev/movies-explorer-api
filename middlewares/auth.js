@@ -16,5 +16,5 @@ module.exports = (req, res, next) => {
     return next(new Unauthorized(NOTAUTH_ERROR_MESSAGE));
   }
   req.user = payload; // записываем пейлоуд в объект запроса
-  next(); // пропускаем запрос дальше
+  return next(); // пропускаем запрос дальше
 };

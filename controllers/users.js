@@ -67,9 +67,9 @@ module.exports.getUser = async (req, res, next) => {
     if (!user) {
       return next(new NotFoundError(USER_NOTFOUND_ERROR_MESSAGE));
     }
-    res.send(user);
+    return res.send(user);
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };
 
