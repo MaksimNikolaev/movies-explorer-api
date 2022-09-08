@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const helmet = require('helmet');
 const error = require('./middlewares/error');
 const routes = require('./routes/index');
 const NotFoundError = require('./errors/Not-found-err');
@@ -20,6 +21,8 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use(cors());
+
+app.use(helmet());
 
 app.use(routes); // подключаем роуты
 
