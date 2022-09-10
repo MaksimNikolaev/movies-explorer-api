@@ -17,6 +17,7 @@ const NOTLINK_ERROR_MESSAGE = 'Введите ссылку.';
 const MIN_LENGTH_MESSAGE = 'Минимальная длина имени — 2 символа';
 const MAX_LENGTH_MESSAGE = 'Максимальная длина имени — 30 символов';
 const INCORRECT_EMAIL_MESSAGE = 'Неправильный формат почты.';
+const USER_EXIST_ERROR_MESSAGE = 'Пользователь с указанным email уже существует. Попробуйте еще.';
 
 module.exports = {
   regExpUrl,
@@ -34,4 +35,5 @@ module.exports = {
   MIN_LENGTH_MESSAGE,
   MAX_LENGTH_MESSAGE,
   INCORRECT_EMAIL_MESSAGE,
+  USER_EXIST_ERROR_MESSAGE,
 };

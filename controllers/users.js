@@ -13,6 +13,7 @@ const {
   VALIDATE_EMAIL_ERROR_MESSAGE,
   INCORRECT_DATA_ERROR_MESSAGE,
   USER_NOTFOUND_ERROR_MESSAGE,
+  USER_EXIST_ERROR_MESSAGE,
 } = require('../utils/constants');
 
 module.exports.login = async (req, res, next) => {
@@ -91,8 +92,8 @@ module.exports.updateProfile = async (req, res, next) => {
     }
     res.send(user);
   } catch (err) {
-    if (err.name === 'CastError') {
-      next(new BadRequest(INCORRECT_DATA_ERROR_MESSAGE));
+    if (err.code === 11000) {
+      next(new ConflictError(USER_EXIST_ERROR_MESSAGE));
       return;
     }
     if (err.name === 'ValidationError') {
