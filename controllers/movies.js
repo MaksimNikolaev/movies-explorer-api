@@ -11,8 +11,9 @@ const {
 } = require('../utils/constants');
 
 module.exports.getMovies = async (req, res, next) => {
+  const owner = req.user._id;
   try {
-    const movie = await Movie.find({});
+    const movie = await Movie.find({ owner });
     res.send(movie);
   } catch (err) {
     next(new InternalServerError(DEFAULT_ERROR_MESSAGE));
