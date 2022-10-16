@@ -25,6 +25,11 @@
 * ```POST /movies``` - сохраняет фильм
 * ```DELETE /movies/:movieId``` - удаляет сохранённый фильм по id
 
-## Ссылка на api проекта
+## Ссылка на фронтенд<br>
+https://films.nomoredomains.sbs/
 
-- [Movies Explorer API](https://api.films.nomoredomains.sbs)
+## Ссылка на бэкенд<br>
+https://api.films.nomoredomains.sbs/
+
+## Ссылка на макет<br>
+https://disk.yandex.ru/d/-GHW9zEe6RTAPg
