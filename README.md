@@ -26,10 +26,10 @@
 * ```DELETE /movies/:movieId``` - удаляет сохранённый фильм по id
 
 ## Ссылка на фронтенд<br>
-https://films.nomoredomains.sbs/
+https://nmovies-films.students.nomoredomainssbs.ru/
 
 ## Ссылка на бэкенд<br>
-https://api.films.nomoredomains.sbs/
+https://api.nmovies-films.students.nomoredomainssbs.ru/
 
 ## Ссылка на макет<br>
 https://disk.yandex.ru/d/-GHW9zEe6RTAPg
